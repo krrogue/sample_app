@@ -15,6 +15,15 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should be_valid }
 
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
+    end
+
+    it { should be_admin }
+  end
+
   describe "when name is not present" do
   	before { @user.name = " " }
   	it { should_not be_valid }
